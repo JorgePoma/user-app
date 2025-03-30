@@ -1,4 +1,4 @@
-import { Controller, UseFilters } from '@nestjs/common';
+import { Controller, Logger, UseFilters } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { MessagingService } from './messaging.service';
 import { UserMSG } from 'src/common/constants';
@@ -12,6 +12,7 @@ export class MessagingController {
 
   @MessagePattern(UserMSG.VALIDATE_USER)
   validateUser(@Payload() body: Types.ObjectId) {
+    Logger.log(body, 'Validando usuario');
     return this.messagingService.validateUser(body);
   }
 
